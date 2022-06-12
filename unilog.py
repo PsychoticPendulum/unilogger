@@ -95,6 +95,12 @@ class COMMAND:
     # Delete currently selected file    
     def Delete():
         FILE.Delete(f"{SYSTEM.PATH}{SYSTEM.NAME}")
+    
+
+    # Open file in users main editor
+    def Open():
+        editor = os.popen("echo $EDITOR").read().rstrip("\n")
+        os.system(f"{editor} {SYSTEM.PATH}{SYSTEM.NAME}")
 
 
 def Prompt():
@@ -118,7 +124,8 @@ def Prompt():
         case "file":    COMMAND.File()
         case "list":    COMMAND.List()
         case "delete":  COMMAND.Delete()
-        case "read":    COMMAND.Read() 
+        case "read":    COMMAND.Read()
+        case "open":    COMMAND.Open()
         # Info
         case "version": INFO.Version()
         case "credits": INFO.Credits()

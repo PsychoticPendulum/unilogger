@@ -15,7 +15,7 @@ EXIT_FAILURE    = 1
 #   ------------------------------
 class INFO:
 
-    VERSION     = "v1.23"
+    VERSION     = "v1.3.5"
     CREDITS     = "PsychicPenguin"
     LICENSE     = "GNU Public License 3.0"
 
@@ -79,6 +79,7 @@ class HELP:
         f"{UTIL.BOLD}list            {UTIL.RESET}{UTIL.ITALICS}List current directory",
         f"{UTIL.BOLD}delete          {UTIL.RESET}{UTIL.ITALICS}Delete current file",
         f"{UTIL.BOLD}file            {UTIL.RESET}{UTIL.ITALICS}Change current file",
+        f"{UTIL.BOLD}open            {UTIL.RESET}{UTIL.ITALICS}Open current file in editor",
         "",
         f"{UTIL.BOLD}version         {UTIL.RESET}{UTIL.ITALICS}Display current version",
         f"{UTIL.BOLD}credits         {UTIL.RESET}{UTIL.ITALICS}Display credits",
@@ -167,7 +168,7 @@ class STATUS:
         SetCursor(0, TERM.Height() * int(bottom))
 
         # Set content to update automatically every frame
-        STATUS.LEFT[int(bottom)] = f"{SYSTEM.PATH}{SYSTEM.NAME}"
+        # STATUS.LEFT[int(bottom)] = f"{SYSTEM.PATH}{SYSTEM.NAME}"
 
         # Create the line that will be printed as a status bar
         # It's like regex, easy to write, hard to read ... But it does make sense, I promise 
@@ -511,6 +512,19 @@ class TERM:
         TERM.Printf(f"{UTIL.CLEARLINE}{msg}")
 
 
+    # Function to list entries in an array
+    def List(items,color=f"{FG.GREEN}"):
+        index = 0
+        for item in items:
+                # Indexstring still displaying line numbers nicely
+                index       += 1
+                indexstr    = " " * (3 - len(str(index))) + str(index)
+
+                # Draw the final output
+                TERM.Printc(f"{color} {indexstr} {UNICODE.VERTICAL[BOX.STYLE.DOUBLE]}{UTIL.RESET}  {item}\n")
+
+
+
     # Prints a feedback at the right side of the screen
     def Feedback(msg,color=f"{FG.GREEN}"):
         # Position is width - length of msg
@@ -572,10 +586,11 @@ class TERM:
     def Init():
         # this line makes ansi work on windows, doesn't hurt on unix-based systems either
         os.system("")
-        Clear()
-        Log(LVL.INFO, "Initializing PyCurse Module ...")
+#        Clear()
+#        Log(LVL.INFO, "Initializing PyCurse Module ...")
 
         # Operating System
+ #       Log(LVL.INFO, "Checking Operating System ...")
         match sys.platform:
             case "win32":   SYSTEM.Windows()
             case "linux":   SYSTEM.Linux()
@@ -586,8 +601,7 @@ class TERM:
             case _:
                 Log(LVL.ERROR, f"Operating System not supported: {UTIL.UNDERLINE}{sys.platform}")
                 return EXIT_FAILURE 
-        Log(LVL.INFO, f"Operating System detected: {UTIL.UNDERLINE}{SYSTEM.OS}")
-
+  #      TERM.Feedback(f"{SYSTEM.OS}")
 
         # Create working directory if not already exists
         if not FILE.Exists(f"{SYSTEM.PATH}"):
@@ -613,6 +627,12 @@ class SETTINGS:
 #   ------------------------------
 #   |        _INITIALIZE         |
 #   ------------------------------
+if __name__ == "__main__":
+    if sys.argv[1] == "--version":
+        print(INFO.VERSION)
+        quit()
+
 if TERM.Init() != EXIT_SUCCESS:
     Log(LVL.ERROR, "Failed to initialize module")
     TERM.Exit()
+
