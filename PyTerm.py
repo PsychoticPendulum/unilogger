@@ -62,42 +62,6 @@ class UNICODE:
     BOTTOMRIGHT = ["╯","┛","╝","╯","-"]
     HORIZONTAL  = ["─","━","═","╌","-"]
 
-#   ------------------------------
-#   |           _HELP            |
-#   ------------------------------
-class HELP:
-
-    # Array of commands and their respective tooltips
-    COMMANDS = [
-        f"{UTIL.BOLD}help            {UTIL.RESET}{UTIL.ITALICS}Show list of commands",
-        f"{UTIL.BOLD}exit            {UTIL.RESET}{UTIL.ITALICS}Close this program",
-        f"{UTIL.BOLD}clear           {UTIL.RESET}{UTIL.ITALICS}Clear the screen",
-        "",
-        f"{UTIL.BOLD}entry           {UTIL.RESET}{UTIL.ITALICS}Add another entry",
-        "",
-        f"{UTIL.BOLD}read            {UTIL.RESET}{UTIL.ITALICS}Read contents of file",
-        f"{UTIL.BOLD}list            {UTIL.RESET}{UTIL.ITALICS}List current directory",
-        f"{UTIL.BOLD}delete          {UTIL.RESET}{UTIL.ITALICS}Delete current file",
-        f"{UTIL.BOLD}file            {UTIL.RESET}{UTIL.ITALICS}Change current file",
-        f"{UTIL.BOLD}open            {UTIL.RESET}{UTIL.ITALICS}Open current file in editor",
-        "",
-        f"{UTIL.BOLD}version         {UTIL.RESET}{UTIL.ITALICS}Display current version",
-        f"{UTIL.BOLD}credits         {UTIL.RESET}{UTIL.ITALICS}Display credits",
-        f"{UTIL.BOLD}license         {UTIL.RESET}{UTIL.ITALICS}Display license",
-    ]
-
-    # Draw Help Menu
-    def Help():
-        TERM.Printc(f"\n{UTIL.UNDERLINE}List of available commands:\n\n")
-        
-        index = 0
-        for COMMAND in HELP.COMMANDS:
-            # Indexstring is to display line numbers: 12 | command ... tooltip
-            index       += 1
-            indexstr    = " " * (3 - len(str(index))) + str(index) 
-
-            TERM.Printc(f"{FG.CYAN} {indexstr} {UNICODE.VERTICAL[1]}{UTIL.RESET}  {COMMAND}\n")
-
 
 #   ------------------------------
 #   |          _SYSTEM           |
