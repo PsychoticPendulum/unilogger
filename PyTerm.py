@@ -15,7 +15,7 @@ EXIT_FAILURE    = 1
 #   ------------------------------
 class INFO:
 
-    VERSION     = "v1.3.5"
+    VERSION     = "v1.3.6"
     CREDITS     = "PsychicPenguin"
     LICENSE     = "GNU Public License 3.0"
 
