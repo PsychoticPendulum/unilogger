@@ -15,7 +15,7 @@ EXIT_FAILURE    = 1
 #   ------------------------------
 class INFO:
 
-    VERSION     = "v1.3.6"
+    VERSION     = "v1.3.7"
     CREDITS     = "PsychicPenguin"
     LICENSE     = "GNU Public License 3.0"
 
@@ -156,7 +156,7 @@ class BOX:
 
 
     # Draws a box around a text, centered in the terminal
-    def Info(msg,color=f"{FG.CYAN}",style=0):
+    def Info(msg,color=f"{FG.CYAN}",style=0,align=1):
         # Set sane default value if called incorrectly
         if 0 > style > 3:
             style = 0
