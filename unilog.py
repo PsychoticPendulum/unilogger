@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 from PyTerm import *
-
+import readline
 
 class CLI:
 
